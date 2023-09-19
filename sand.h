@@ -1,7 +1,9 @@
 class sand_particle
 {
 public:
-    sand_particle(float x, float y);
-    static bool fall();
-    static bool draw();
+    int coord_x, coord_y;
+    sand_particle();
+    sand_particle(int x, int y);
+    bool fall(sand_particle* particles_array);
+    bool draw(HANDLE cmd_handle, char symbol);
 };
