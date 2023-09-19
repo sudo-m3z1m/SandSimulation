@@ -19,15 +19,16 @@ bool sand_fall(HANDLE cmd_handle, int start_pos_x)
 
 int main()
 {
-    HANDLE cmd_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD coordinates;
-    int particle_spawn_range = 100;
-    int border = 20;
-    int particles_quantity = 60;
+    int particles[256];
+    // HANDLE cmd_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    // COORD coordinates;
+    // int particle_spawn_range = 100;
+    // int border = 20;
+    // int particles_quantity = 60;
 
-    for (int particle = 0; particle < particles_quantity; particle++)
-    {
-        int particle_draw_x = rand() % particle_spawn_range;
-        sand_fall(cmd_handle, particle_draw_x);
-    }
+    // for (int particle = 0; particle < particles_quantity; particle++)
+    // {
+    //     int particle_draw_x = rand() % particle_spawn_range;
+    //     sand_fall(cmd_handle, particle_draw_x);
+    // }
 }
