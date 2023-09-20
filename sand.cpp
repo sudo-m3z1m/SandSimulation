@@ -1,5 +1,4 @@
-#include <sand.h>
-#include <Windows.h>
+#include "sand.h"
 
 sand_particle::sand_particle()
 {
@@ -7,33 +6,34 @@ sand_particle::sand_particle()
 
 sand_particle::sand_particle(int x, int y)
 {
-    coord_x = x;
-    coord_y = y;
+    coordinates.X = x;
+    coordinates.Y = y;
 }
 
 bool sand_particle::fall(sand_particle* particles_array)
 {
-    for(int i = 0; i < 255; i++)
+    for (int i = 0; i < 12; i++)
     {
-        if((coord_x == particles_array[i].coord_x) && (coord_y == (particles_array[i].coord_y - 1)))
+        std::cout << coordinates.Y << std::endl;
+        if ((coordinates.X == particles_array[i].coordinates.X) && (coordinates.X == (particles_array[i].coordinates.X - 1)))
         {
             break;
         }
-        if(coord_y == 40)
+        if (coordinates.Y >= 40)
         {
             break;
         }
         else
-            coord_y++;
+            coordinates.Y++;
+            return true;
     }
+        return false;
 }
 
 bool sand_particle::draw(HANDLE cmd_handle, char symbol)
 {
     DWORD drawed_characters;
-    COORD coordinates;
 
-    coordinates.X = coord_x;
-    coordinates.Y = coord_y;
     FillConsoleOutputCharacter(cmd_handle, symbol, 1, coordinates, &drawed_characters);
+    return true;
 }
