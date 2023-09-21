@@ -34,7 +34,7 @@ sand_particle particles[64];
 			 if (((*part).coordinates.Y + 1) == (particle.coordinates.Y))
 			 {
 				 return false;
-				 //std::cout << particle.coordinates.X << std::endl << particle.coordinates.Y << std::endl;
+
 			 }
 		 }
 	 }
@@ -44,7 +44,6 @@ sand_particle particles[64];
 
 int main()
 {
-	//std::cout << "Hi";
 	int part_quant = 0;
 	while (true)
 	 {
@@ -54,7 +53,6 @@ int main()
 		 particles[part_quant] = new_part;
 		 part_quant++;
 
-		 /*make_particle(particles, &part_quant);*/
 		 HANDLE cmd_handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 		 for (int i = 0; i < 64; i++)
@@ -63,7 +61,6 @@ int main()
 			 part->draw(cmd_handle, ' ');
 			 fall(part);
 			 part->draw(cmd_handle, 'A');
-			 //std::cout << part.coord_x << part.coord_y;
 		 }
 		 Sleep(100);
 	 }
