@@ -5,6 +5,7 @@ class sand_particle
 {
 public:
     COORD coordinates;
-    sand_particle();
+    bool is_empty;
+    sand_particle(bool empty = false);
     bool fall(COORD new_coordinates);
 };

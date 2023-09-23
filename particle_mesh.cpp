@@ -11,25 +11,31 @@ particle_mesh::particle_mesh(int x = 32, int y = 32)
 
 sand_particle particle_mesh::make_particle(COORD coord)
 {
-    sand_particle new_particle;
+    sand_particle new_particle(false);
     new_particle.coordinates = coord;
     mesh[coord.X][coord.Y] = new_particle;
 }
 
 COORD particle_mesh::check_particles(sand_particle particle)
 {
-    // COORD coords_down, coords_down_left, coords_down_right;
-    // coords_down.X = particle.coordinates.X;
-    // coords_down.Y = particle.coordinates.Y + 1;
+    COORD new_coords;
+    int new_y, new_x_right, new_x_left;
+    new_y = particle.coordinates.Y + 1;
+    new_x_right = particle.coordinates.X + 1;
+    new_x_left = particle.coordinates.X - 1;
 
-    // coords_down_left.X = particle.coordinates.X - 1;
-    // coords_down_left.Y = particle.coordinates.Y + 1; //Useless theme
-    
-    // coords_down_right.X = particle.coordinates.X + 1;
-    // coords_down_right.Y = particle.coordinates.Y + 1;
+    if(mesh[particle.coordinates.X][new_y].is_empty)
+    {
+        new_coords.X = particle.coordinates.X;
+        new_coords.Y = new_y;
 
-    // if()
-    // {
+        if(mesh[new_x_left][new_y].is_empty)
+        {
+            new_coords.X = new_x_left;
+            new_coords.Y = new_y;
+            return new_coords;
+        }
 
-    // }
+        return new_coords;
+    }
 }
