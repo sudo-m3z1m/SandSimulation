@@ -28,14 +28,20 @@ COORD particle_mesh::check_particles(sand_particle particle)
     {
         new_coords.X = particle.coordinates.X;
         new_coords.Y = new_y;
+        return new_coords;
+    }
 
+    if(mesh[new_x_left][new_y].is_empty)
+    {
         if(mesh[new_x_left][new_y].is_empty)
         {
-            new_coords.X = new_x_left;
+            new_coords.X = particle.coordinates.X + 1;
             new_coords.Y = new_y;
             return new_coords;
         }
-
+        
+        new_coords.X = particle.coordinates.X - 1;
+        new_coords.Y = new_y;
         return new_coords;
     }
 }
