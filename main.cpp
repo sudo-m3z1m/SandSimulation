@@ -1,67 +1,45 @@
 #include <iostream>
 #include <Windows.h>
-#include "sand.h"
+#include "particle_mesh.h"
 
-sand_particle particles[64];
-
- int make_particle(int particle_quant, sand_particle* particles_array)
- {
-	 int particles_max_quantity = 40;
-	 int max_coord_x = 10;
-	 int random_coord_x;
-
-	 if(particle_quant >= 40)
-		 return particle_quant;
-
-	 random_coord_x = rand() % max_coord_x;
-	 sand_particle new_particle(random_coord_x, 0);
-	 particle_quant++;
- }
-
- bool fall(sand_particle* part)
- {
-	 if ((*part).coordinates.Y >= 20)
-	 {
-		 return false;
-	 }
-
-	 for (int i = 0; i < 64; i++)
-	 {
-		 sand_particle particle = particles[i];
-
-		 if ((*part).coordinates.X == particle.coordinates.X)
-		 {
-			 if (((*part).coordinates.Y + 1) == (particle.coordinates.Y))
-			 {
-				 return false;
-
-			 }
-		 }
-	 }
-	 part->coordinates.Y += 1;
-	 return true;
- }
+COORD get_random_sp(int* particles_quant);
 
 int main()
 {
-	int part_quant = 0;
-	while (true)
-	 {
-		 int new_x_coord;
-		 new_x_coord = rand() % 16;
-		 sand_particle new_part(new_x_coord, 0);
-		 particles[part_quant] = new_part;
-		 part_quant++;
+    COORD new_coords;
+    new_coords.X = 0;
+    new_coords.Y = 0;
+    particle_mesh mesh(32, 32);
+    int particles_quant = 0;
+    while(true)
+    {
+        mesh.make_particle(get_random_sp(&particles_quant));
+        /*for (int i = 0; i < 16; i++)
+        {
+            if (new_coords.X > 16)
+                continue;
+            mesh.make_particle(new_coords);
+            new_coords.X++;
+        }*/
+        mesh.fall_particles();
+        Sleep(1000);
+    }
+}
 
-		 HANDLE cmd_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD get_random_sp(int* particles_quant)
+{
+    COORD new_coordinates;
+    new_coordinates.X = -5;
+    new_coordinates.Y = -5;
+    if((*particles_quant) == 32)
+        return new_coordinates;
 
-		 for (int i = 0; i < 64; i++)
-		 {
-			 sand_particle* part = &particles[i];
-			 part->draw(cmd_handle, ' ');
-			 fall(part);
-			 part->draw(cmd_handle, 'A');
-		 }
-		 Sleep(100);
-	 }
+    int x, y;
+    y = 0;
+    x = rand() % 32;
+    new_coordinates.X = x;
+    new_coordinates.Y = y;
+    (*particles_quant)++;
+
+    return new_coordinates;
 }

@@ -5,7 +5,7 @@ sand_particle::sand_particle(bool empty = true)
     is_empty = empty;
 }
 
-bool sand_particle::fall(COORD new_coordinates)
+void sand_particle::move(COORD new_coordinates)
 {
-
+    coordinates = new_coordinates;
 }

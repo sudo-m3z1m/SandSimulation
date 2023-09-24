@@ -45,3 +45,19 @@ COORD particle_mesh::check_particles(sand_particle particle)
         return new_coords;
     }
 }
+
+void particle_mesh::fall_particles()
+{
+    for(int buff_x = 0; buff_x < x; buff_x++)
+    {
+        for(int buff_y = 0; buff_y < y; buff_y++)
+        {
+            COORD new_particle_coordinates;
+            sand_particle part;
+            part = mesh[buff_x][buff_y];
+            new_particle_coordinates = check_particles(part);
+            part.move(new_particle_coordinates);
+            draw_manager::draw_particles(mesh);
+        }
+    }
+}

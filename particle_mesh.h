@@ -1,4 +1,4 @@
-#include "sand.h"
+#include "draw_manager.h"
 
 class particle_mesh
 {
@@ -10,4 +10,5 @@ public:
     particle_mesh(int x = 32, int y = 32);
     sand_particle make_particle(COORD coord);
     COORD check_particles(sand_particle particle);
+    void fall_particles();
 };

@@ -6,6 +6,6 @@ class sand_particle
 public:
     COORD coordinates;
     bool is_empty;
-    sand_particle(bool empty = false);
-    bool fall(COORD new_coordinates);
+    sand_particle(bool empty = true);
+    void move(COORD new_coordinates);
 };
