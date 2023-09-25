@@ -5,23 +5,30 @@ void draw_manager::clear_screen()
     std::cout << "\033[2J\033[1;1H";
 }
 
-void draw_manager::draw_particles(sand_particle** particles_mash)
+void draw_manager::draw_particles(sand_particle** particles_mesh)
 {
-    clear_screen();
+    //clear_screen();
     HANDLE cmd_handle = GetStdHandle(STD_OUTPUT_HANDLE);
     int size_x, size_y;
-    size_x = sizeof(particles_mash) / sizeof(particles_mash[0]);
-    size_y = sizeof(particles_mash) / sizeof(particles_mash[0][0]) / size_x;
-    
-    for(int x = 0; x < size_x; x++)
+    char symbols[2]{ '0', '1' };
+    size_x = 32;
+    size_y = 32;
+
+    for (int i = 0; i < size_x; i++)
     {
-        for(int y = 0; y < size_y; y++)
+        for (int j = 0; j < size_y; j++)
         {
             char symbol;
             DWORD entered_characters;
             COORD particle_coordinates;
-            symbol = rand() % 2;
-            particle_coordinates = particles_mash[x][y].coordinates;
+            symbol = symbols[rand() % 2];
+            particle_coordinates.X = i;
+            particle_coordinates.Y = j;
+            if (particles_mesh[i][j].is_empty)
+            {
+                FillConsoleOutputCharacter(cmd_handle, ' ', 1, particle_coordinates, &entered_characters);
+                continue;
+            }
             FillConsoleOutputCharacter(cmd_handle, symbol, 1, particle_coordinates, &entered_characters);
         }
     }

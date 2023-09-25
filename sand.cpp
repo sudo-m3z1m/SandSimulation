@@ -1,6 +1,6 @@
 #include "sand.h"
 
-sand_particle::sand_particle(bool empty = true)
+sand_particle::sand_particle(bool empty)
 {
     is_empty = empty;
 }
